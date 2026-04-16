@@ -1,0 +1,21 @@
+# ablation_no_mel.yaml
+# Ablation: replace the Mel filterbank with raw STFT magnitude bins.
+#
+# MelExtractor.use_linear_scale=True switches from T.MelSpectrogram to
+# T.Spectrogram, producing n_fft//2+1 = 257 linear frequency bins instead
+# of 128 mel-warped bins.
+#
+# Tests whether the perceptual mel-frequency scale contributes to TTM accuracy
+# vs. a flat linear-frequency representation. Hypothesis: mel warping discards
+# high-frequency energy that is informative for identifying speech directed at
+# the camera-wearer.
+
+# @package _global_
+defaults:
+  - override /audio/train: train
+
+experiment_name: ablation_no_mel
+
+# Activate linear STFT mode in MelExtractor
+use_linear_scale: true
+# n_mels is ignored when use_linear_scale=true; effective freq bins = n_fft//2+1 = 257

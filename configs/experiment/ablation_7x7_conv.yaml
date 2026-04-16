@@ -1,0 +1,14 @@
+# ablation_7x7_conv.yaml
+# Ablation: replace the (7,1) first conv with a standard (7,7) conv.
+# Tests whether frequency-axis-preserving convolution matters for TTM.
+# Hypothesis: (7,7) over-strides the mel axis and loses low-level spectral
+# structure, hurting performance on the TTM binary task.
+
+# @package _global_
+defaults:
+  - override /audio/model: model
+
+experiment_name: ablation_7x7_conv
+
+first_conv_kernel: [7, 7]
+first_conv_stride: [2, 2]

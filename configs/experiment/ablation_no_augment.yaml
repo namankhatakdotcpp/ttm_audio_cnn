@@ -1,0 +1,18 @@
+# ablation_no_augment.yaml
+# Ablation: disable ALL augmentations (SpecAugment, noise, pitch shift).
+# Tests the contribution of the augmentation pipeline to generalization.
+
+# @package _global_
+defaults:
+  - override /audio/train: train
+
+experiment_name: ablation_no_augment
+
+# Zero out all augmentation parameters — effectively disabled
+specaugment:
+  freq_mask_param: 0
+  time_mask_param: 0
+  num_masks: 0
+
+noise_snr_range: [999, 1000]   # SNR so high that noise is inaudible
+pitch_shift_semitones: 0        # no pitch shift

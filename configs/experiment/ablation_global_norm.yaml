@@ -1,0 +1,20 @@
+# ablation_global_norm.yaml
+# Ablation: replace per-clip z-score normalization with global dataset statistics.
+# Tests whether per-clip normalization outperforms a fixed global mean/std.
+#
+# clip_norm_range=99 effectively disables clamping (no practical clip at ±99).
+# The actual global normalization logic must be implemented in MelExtractor
+# when this flag is active (handled by checking cfg.global_norm == true).
+
+# @package _global_
+defaults:
+  - override /audio/mel: mel
+
+experiment_name: ablation_global_norm
+
+# Signal to MelExtractor to use pre-computed global mean/std instead of
+# per-clip statistics. Set the values for your dataset below.
+global_norm: true
+global_mean: -30.0   # dB, approximate value — compute on train split first
+global_std: 15.0     # dB
+clip_norm_range: 99  # disable effective clamping

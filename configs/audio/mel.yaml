@@ -1,0 +1,19 @@
+# mel.yaml — Mel spectrogram front-end configuration
+# Used by MelExtractor and preprocess_audio.py
+
+sample_rate: 16000
+n_fft: 512
+hop_length: 160
+n_mels: 128
+f_min: 0
+f_max: 8000
+clip_norm_range: 3.0       # clamp per-clip z-scored spectrogram to [-3, 3]
+
+# Temporal windowing for downstream sliding-window embedding extraction
+window_duration_sec: 0.5   # each window is 0.5 s → ~50 Mel frames at hop=160
+window_stride_sec: 0.1     # 100ms stride between windows → T windows per clip
+
+# Paths (override on CLI or in train.yaml)
+annotation_path: ???
+video_dir: ???
+mel_cache_dir: outputs/mel_cache

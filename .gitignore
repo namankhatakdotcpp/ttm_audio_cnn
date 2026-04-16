@@ -1,0 +1,70 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+*.so
+
+# Virtual envs / conda
+.env
+.venv
+env/
+venv/
+*.conda
+conda-meta/
+
+# Hydra outputs
+outputs/
+multirun/
+.hydra/
+
+# Caches (large binary data — managed separately)
+outputs/mel_cache/
+outputs/embeddings/
+outputs/checkpoints/
+outputs/wandb/
+outputs/eval/
+outputs/gradcam/
+outputs/dry_run_checkpoints/
+
+# WandB
+wandb/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# PyTorch artifacts
+*.pt
+*.pth
+*.ckpt
+!scripts/*.py   # never ignore scripts
+
+# OS
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# IDE
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Data (keep annotation JSONs, ignore large video/audio files)
+ego4d_data/
+*.mp4
+*.mp3
+*.wav
+*.flac
+
+# Logs
+*.log
+logs/

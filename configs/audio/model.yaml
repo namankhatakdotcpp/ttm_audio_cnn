@@ -1,0 +1,19 @@
+# model.yaml — AudioCNN backbone and projection head configuration
+
+backbone: resnet18
+
+# First conv patch: (7,1) preserves the frequency axis structure
+# Standard (7,7) would over-stride the mel-frequency axis early
+first_conv_kernel: [7, 1]
+first_conv_stride: [2, 1]
+
+# Remove layer4 — use 256-channel output of layer3 (reduces over-fitting)
+drop_last_layer: true
+
+# Projection head output dimensionality
+embedding_dim: 256
+
+dropout: 0.2
+
+# Initialize backbone from ImageNet weights, then fine-tune
+pretrained: true

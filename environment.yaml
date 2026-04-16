@@ -1,0 +1,43 @@
+name: ttm_audio
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+  - defaults
+
+dependencies:
+  # Python
+  - python=3.10
+
+  # PyTorch stack — CUDA 12 wheels
+  - pytorch::pytorch>=2.1.0
+  - pytorch::torchvision>=0.16.0
+  - pytorch::torchaudio>=2.1.0
+  - pytorch::pytorch-cuda=12.1
+
+  # Core ML / training
+  - conda-forge::pytorch-lightning>=2.1.0
+  - conda-forge::torchmetrics>=1.2.0
+
+  # Config management
+  - conda-forge::hydra-core>=1.3.2
+  - conda-forge::omegaconf>=2.3.0
+
+  # Experiment tracking
+  - conda-forge::wandb>=0.16.0
+
+  # Data science
+  - conda-forge::numpy>=1.24.0
+  - conda-forge::pandas>=2.0.0
+  - conda-forge::scikit-learn>=1.3.0
+
+  # Visualization
+  - conda-forge::matplotlib>=3.7.0
+
+  # Utilities
+  - conda-forge::tqdm>=4.66.0
+  - conda-forge::pillow>=10.0.0
+
+  # Pip-only packages
+  - pip:
+    - grad-cam>=1.4.8      # optional: pytorch-grad-cam for alternative CAM methods

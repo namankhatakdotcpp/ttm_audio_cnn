@@ -1,0 +1,51 @@
+# train.yaml — full training configuration
+# Merges mel.yaml + model.yaml and adds training hyperparameters
+
+defaults:
+  - audio/mel
+  - audio/model
+  - _self_
+
+# ── Experiment identity ─────────────────────────────────────────────
+experiment_name: ttm_audio_baseline
+
+# ── Paths (set these for your cluster / local machine) ──────────────
+annotation_path: ${oc.env:HOME}/ego4d_data/v2/annotations/av_train.json
+video_dir: ${oc.env:HOME}/ego4d_data/v2/full_scale
+mel_cache_dir: outputs/mel_cache
+output_dir: outputs
+
+# ── DataLoader ───────────────────────────────────────────────────────
+batch_size: 128
+num_workers: 8
+pin_memory: true
+max_frames: null        # null = infer per-batch (variable-length mode)
+
+# ── Optimizer ────────────────────────────────────────────────────────
+optimizer: adamw
+lr: 1.0e-4
+weight_decay: 1.0e-2
+
+# ── Schedule ─────────────────────────────────────────────────────────
+max_epochs: 40
+warmup_epochs: 5
+
+# ── Loss ─────────────────────────────────────────────────────────────
+label_smoothing: 0.1
+class_weight_mode: inverse_freq   # auto-computed from train split labels
+
+# ── Mixed precision ──────────────────────────────────────────────────
+use_amp: true
+
+# ── Augmentation ─────────────────────────────────────────────────────
+specaugment:
+  freq_mask_param: 27
+  time_mask_param: 40
+  num_masks: 2
+
+noise_snr_range: [5, 20]
+pitch_shift_semitones: 2
+
+# ── Optional trainer overrides (passed directly to pl.Trainer) ───────
+trainer:
+  # fast_dev_run: true   # uncomment for smoke test
